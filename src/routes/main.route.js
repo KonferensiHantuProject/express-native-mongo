@@ -5,7 +5,10 @@ const router = express.Router();
 // Controller
 const userController = require('../controller/main.controller')
 
-// Home
+// Index
 router.get('/', userController.index);
+
+// Create
+router.post('/', userController.create);
 
 module.exports = router;

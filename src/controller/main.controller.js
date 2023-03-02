@@ -33,6 +33,40 @@ index = async (req, res) => {
     }
 }
 
+// Create Data
+create = async (req, res) => {
+    try {
+
+        // Running Connection
+        mongoClient = await connectToCluster();
+
+        // Database
+        const db = mongoClient.db('admin');
+        
+        // Collection
+        const collection = db.collection('Anu');
+
+        // Prepare Data
+        const dataCollection = {
+            name: req.body.name,
+            date_of_birth: req.body.date_of_birth,
+            age: req.body.age,
+        }
+
+        // Create New Data
+        const data = await collection.insertOne(dataCollection);
+
+        return ResponseBulider.success(res, data);
+    } catch (error) {
+        // If Error
+        return ResponseBulider.errors(res, 500, error.message);
+    }finally{
+        // Closing Connection
+        await mongoClient.close();
+    }
+}
+
 module.exports = {
-    index
+    index,
+    create
 }
