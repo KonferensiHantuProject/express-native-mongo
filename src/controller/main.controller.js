@@ -19,9 +19,11 @@ index = async (req, res) => {
         
         // Collection
         const collection = db.collection('Anu');
-        console.log(collection);
 
-        return ResponseBulider.success(res, "Jalan");
+        // Get All Data
+        const data = await collection.find().toArray();
+
+        return ResponseBulider.success(res, data);
     } catch (error) {
         // If Error
         return ResponseBulider.errors(res, 500, error.message);

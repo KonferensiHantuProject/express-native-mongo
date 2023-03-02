@@ -1,8 +1,11 @@
 // Importing MongoClient from mongodb driver
 const { MongoClient } = require('mongodb');
- 
+
+// Env
+require('dotenv').config();
+
 // Connecting to a local port
-const uri = 'mongodb://127.0.0.1:27017';
+const uri = process.env.DATABASE_URL;
 
 // Client
 const client = new MongoClient(uri, {
